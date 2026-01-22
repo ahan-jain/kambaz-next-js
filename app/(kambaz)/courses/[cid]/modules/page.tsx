@@ -50,6 +50,29 @@ export default function Modules() {
         </li>
         <li className="wd-module">
           <div className="wd-title">Week 1, Lecture 2 - Formatting User Interfaces with HTML</div>
+          <ul className="wd-lessons">
+            <li className="wd-lesson">
+              <span className="wd-learning">LEARNING OBJECTIVES</span>
+              <ul className="wd-learn">
+                <li className="wd-learning-item">Learn how to create user interfaces with HTML</li>
+                <li className="wd-learning-item">
+                  Deploy the assignment to Netlify
+                </li>
+              </ul>
+            </li>
+            <li>
+              <span className="wd-slide">SLIDES</span>
+              <ul className="wd-slides">
+                <li className="wd-slides-item">
+                  Introduction to HTML and the DOM
+                </li>
+                <li className="wd-slides-item">
+                  Formatting Web content with Headings and
+                </li>
+                <li className="wd-slides-item">Formatting content with Lists and Tables</li>
+              </ul>
+            </li>
+          </ul>
         </li>
         <li className="wd-module">
           <div className="wd-title">Week 2</div>
