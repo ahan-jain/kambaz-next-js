@@ -20,6 +20,7 @@ export default function labs() {
           </Link>
         </li>
       </ul>
+            <h4>Ahan Jain</h4>
     </div>
   );
 }
