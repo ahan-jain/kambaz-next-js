@@ -21,7 +21,7 @@ export default function AssignmentEditor() {
             <label htmlFor="wd-points">Points</label>
           </td>
           <td>
-            <input id="wd-points" defaultValue={100} />
+            <input id="wd-points" type="number" defaultValue={100} />
           </td>
         </tr>
         <br />
@@ -34,6 +34,7 @@ export default function AssignmentEditor() {
               <option value="ASSIGNMENTS">ASSIGNMENTS</option>
               <option value="QUIZZES">QUIZZES</option>
               <option value="EXAMS">EXAMS</option>
+              <option value="PROJECTS">PROJECTS</option>
             </select>
           </td>
         </tr>
