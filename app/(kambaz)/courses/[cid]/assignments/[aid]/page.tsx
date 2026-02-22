@@ -32,7 +32,6 @@ export default function AssignmentEditor() {
         rows={6}
         className="mb-3"
         defaultValue={
-          assignment?.description ||
           "The assignment is available online.\n\n" +
             "Submit a link to the landing page of your Web application running on Netlify.\n\n" +
             "The landing page should include the following:\n" +
