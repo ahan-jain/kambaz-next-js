@@ -1,3 +1,6 @@
+"use client";
+import { useParams } from "next/navigation";
+import * as db from "../../../database";
 import Link from "next/link";
 import { ListGroup, ListGroupItem } from "react-bootstrap";
 import { BsGripVertical, BsPlus } from "react-icons/bs";
@@ -6,6 +9,8 @@ import { IoEllipsisVertical } from "react-icons/io5";
 import GreenCheckmark from "../modules/GreenCheckmark";
 
 export default function Assignments() {
+  const { cid } = useParams();
+  const assignments = db.assignments;
   return (
     <div id="wd-assignments">
       <div className="d-flex justify-content-between align-items-center mb-3">
@@ -43,71 +48,35 @@ export default function Assignments() {
           </div>
 
           <ListGroup className="rounded-0">
-            <ListGroupItem className="wd-lesson p-3 ps-1 d-flex align-items-center">
-              <BsGripVertical className="me-2 fs-3" />
-              <FaRegEdit className="me-3 text-success" />
-              <div className="flex-fill">
-                <Link
-                  href="/courses/1234/assignments/123"
-                  className="wd-assignment-link text-decoration-none text-dark fw-bold"
+            {assignments
+              .filter((assignment: any) => assignment.course === cid)
+              .map((assignment: any) => (
+                <ListGroupItem
+                  key={assignment._id}
+                  className="wd-lesson p-3 ps-1 d-flex align-items-center"
                 >
-                  A1 - ENV + HTML
-                </Link>
-                <br />
-                <span className="text-muted">
-                  Multiple Modules | <b>Not available until </b> May 6 at
-                  12:00am |<b> Due </b> May 13 at 11:59pm | 100 pts
-                </span>
-              </div>
-              <div className="float-end">
-                <GreenCheckmark />
-                <IoEllipsisVertical className="fs-4" />
-              </div>
-            </ListGroupItem>
-
-            <ListGroupItem className="wd-lesson p-3 ps-1 d-flex align-items-center">
-              <BsGripVertical className="me-2 fs-3" />
-              <FaRegEdit className="me-3 text-success" />
-              <div className="flex-fill">
-                <Link
-                  href="/courses/1234/assignments/124"
-                  className="wd-assignment-link text-decoration-none text-dark fw-bold"
-                >
-                  A2 - CSS + BOOTSTRAP
-                </Link>
-                <br />
-                <span className="text-muted">
-                  Multiple Modules | <b>Not available until </b> May 13 at
-                  12:00am |<b> Due </b> May 20 at 11:59pm | 100 pts
-                </span>
-              </div>
-              <div className="float-end">
-                <GreenCheckmark />
-                <IoEllipsisVertical className="fs-4" />
-              </div>
-            </ListGroupItem>
-
-            <ListGroupItem className="wd-lesson p-3 ps-1 d-flex align-items-center">
-              <BsGripVertical className="me-2 fs-3" />
-              <FaRegEdit className="me-3 text-success" />
-              <div className="flex-fill">
-                <Link
-                  href="/courses/1234/assignments/123"
-                  className="wd-assignment-link text-decoration-none text-dark fw-bold"
-                >
-                  A3 - JAVASCRIPT + REACT
-                </Link>
-                <br />
-                <span className="text-muted">
-                  Multiple Modules | <b>Not available until </b> May 20 at
-                  12:00am |<b> Due </b> May 27 at 11:59pm | 100 pts
-                </span>
-              </div>
-              <div className="float-end">
-                <GreenCheckmark />
-                <IoEllipsisVertical className="fs-4" />
-              </div>
-            </ListGroupItem>
+                  <BsGripVertical className="me-2 fs-3" />
+                  <FaRegEdit className="me-3 text-success" />
+                  <div className="flex-fill">
+                    <Link
+                      href={`/courses/${cid}/assignments/${assignment._id}`}
+                      className="wd-assignment-link text-decoration-none text-dark fw-bold"
+                    >
+                      {assignment.title}
+                    </Link>
+                    <br />
+                    <span className="text-muted">
+                      Multiple Modules | <b>Not available until</b>{" "}
+                      {assignment.availableDate} |<b> Due</b>{" "}
+                      {assignment.dueDate} | {assignment.points} pts
+                    </span>
+                  </div>
+                  <div className="float-end">
+                    <GreenCheckmark />
+                    <IoEllipsisVertical className="fs-4" />
+                  </div>
+                </ListGroupItem>
+              ))}
           </ListGroup>
         </ListGroupItem>
       </ListGroup>
