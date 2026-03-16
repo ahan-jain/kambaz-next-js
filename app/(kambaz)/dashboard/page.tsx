@@ -90,6 +90,7 @@ export default function Dashboard() {
             onChange={(e) => setCourse({ ...course, name: e.target.value })}
           />
           <FormControl
+            as="textarea"
             value={course.description}
             rows={3}
             onChange={(e) =>
@@ -164,7 +165,7 @@ export default function Dashboard() {
                             onClick={(event) => {
                               event.preventDefault();
                               dispatch(
-                                unenroll({ user: currentUser._id, course: course._id })
+                                unenroll({ user: currentUser?._id, course: course._id })
                               );
                             }}
                           >
@@ -176,7 +177,7 @@ export default function Dashboard() {
                             onClick={(event) => {
                               event.preventDefault();
                               dispatch(
-                                enroll({ user: currentUser._id, course: course._id })
+                                enroll({ user: currentUser?._id, course: course._id })
                               );
                             }}
                           >
