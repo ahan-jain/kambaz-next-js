@@ -1,16 +1,25 @@
 "use client";
 import { useParams } from "next/navigation";
-import * as db from "../../../database";
 import Link from "next/link";
 import { ListGroup, ListGroupItem } from "react-bootstrap";
 import { BsGripVertical, BsPlus } from "react-icons/bs";
-import { FaSearch, FaRegEdit } from "react-icons/fa";
+import { FaSearch, FaRegEdit, FaTrash } from "react-icons/fa";
 import { IoEllipsisVertical } from "react-icons/io5";
 import GreenCheckmark from "../modules/GreenCheckmark";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../store";
+import { deleteAssignment } from "./reducer";
 
 export default function Assignments() {
   const { cid } = useParams();
-  const assignments = db.assignments;
+  const dispatch = useDispatch();
+  const { assignments } = useSelector(
+    (state: RootState) => state.assignmentsReducer,
+  );
+  const { currentUser } = useSelector(
+    (state: RootState) => state.accountReducer,
+  );
+
   return (
     <div id="wd-assignments">
       <div className="d-flex justify-content-between align-items-center mb-3">
@@ -22,15 +31,20 @@ export default function Assignments() {
             placeholder="Search for Assignments"
           />
         </div>
-        <div>
-          <button id="wd-add-assignment-group" className="btn btn-light me-2">
-            <BsPlus /> Group
-          </button>
-          <button id="wd-add-assignment" className="btn btn-danger">
-            <BsPlus /> Assignment
-          </button>
-        </div>
+        {currentUser?.role === "FACULTY" && (
+          <div>
+            <button id="wd-add-assignment-group" className="btn btn-light me-2">
+              <BsPlus /> Group
+            </button>
+            <Link href={`/courses/${cid}/assignments/new`}>
+              <button id="wd-add-assignment" className="btn btn-danger">
+                <BsPlus /> Assignment
+              </button>
+            </Link>
+          </div>
+        )}
       </div>
+
       <ListGroup className="rounded-0" id="wd-assignment-list">
         <ListGroupItem className="wd-module p-0 mb-5 fs-5 border-gray">
           <div className="wd-title p-3 ps-2 bg-secondary d-flex justify-content-between align-items-center">
@@ -67,11 +81,26 @@ export default function Assignments() {
                     <br />
                     <span className="text-muted">
                       Multiple Modules | <b>Not available until</b>{" "}
-                      {assignment.availableDate} |<b> Due</b>{" "}
+                      {assignment.availableDate} | <b>Due</b>{" "}
                       {assignment.dueDate} | {assignment.points} pts
                     </span>
                   </div>
-                  <div className="float-end">
+                  <div className="float-end d-flex align-items-center">
+                    {currentUser?.role === "FACULTY" && (
+                      <button
+                        className="btn btn-danger btn-sm me-2"
+                        onClick={(event) => {
+                          event.preventDefault();
+                          const ok = window.confirm(
+                            "Are you sure you want to delete this assignment?",
+                          );
+                          if (!ok) return;
+                          dispatch(deleteAssignment(assignment._id));
+                        }}
+                      >
+                        <FaTrash />
+                      </button>
+                    )}
                     <GreenCheckmark />
                     <IoEllipsisVertical className="fs-4" />
                   </div>
