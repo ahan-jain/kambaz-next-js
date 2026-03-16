@@ -1,13 +1,13 @@
-"use client";
+//"use client";
+//import { useSearchParams } from "next/navigation";
 
-import { useSearchParams } from "next/navigation";
-
-export const dynamic = "force-dynamic";
-export default function QueryCalculator() {
-  const searchParams = useSearchParams();
-  
-  const aRaw = searchParams.get("a") || "0";
-  const bRaw = searchParams.get("b") || "0";
+export default function QueryCalculator({
+  searchParams,
+}: {
+  searchParams: { a?: string; b?: string };
+}) {
+  const aRaw = searchParams.a ?? "0";
+  const bRaw = searchParams.b ?? "0";
 
   const a = parseFloat(aRaw);
   const b = parseFloat(bRaw);
