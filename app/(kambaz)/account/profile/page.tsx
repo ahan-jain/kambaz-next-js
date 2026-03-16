@@ -31,7 +31,6 @@ export default function Profile() {
       {profile && (
         <div>
           <FormControl
-            defaultValue="alice"
             placeholder="username"
             className="wd-username mb-2"
             defaultValue={profile.username}
@@ -40,7 +39,6 @@ export default function Profile() {
             }
           />
           <FormControl
-            defaultValue="123"
             placeholder="password"
             type="password"
             className="wd-password mb-2"
@@ -50,7 +48,6 @@ export default function Profile() {
             }
           />
           <FormControl
-            defaultValue="Alice"
             placeholder="First Name"
             id="wd-firstname"
             className="mb-2"
@@ -60,7 +57,6 @@ export default function Profile() {
             }
           />
           <FormControl
-            defaultValue="Wonderland"
             placeholder="Last Name"
             id="wd-lastname"
             className="mb-2"
@@ -70,7 +66,6 @@ export default function Profile() {
             }
           />
           <FormControl
-            defaultValue="2000-01-01"
             type="date"
             id="wd-dob"
             className="mb-2"
@@ -78,7 +73,6 @@ export default function Profile() {
             onChange={(e) => setProfile({ ...profile, dob: e.target.value })}
           />
           <FormControl
-            defaultValue="alice@wonderland"
             type="email"
             id="wd-email"
             className="mb-2"
