@@ -1,7 +1,7 @@
 "use client";
 import { createContext, useContext, useState, ReactNode } from "react";
 
-const TodosContext = createContext(undefined);
+const TodosContext = createContext<any>(undefined);
 
 export const TodosProvider = ({ children }: { children: ReactNode }) => {
   const [todos, setTodos] = useState([
