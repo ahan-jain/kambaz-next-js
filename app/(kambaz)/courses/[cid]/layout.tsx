@@ -16,18 +16,10 @@ export default function CoursesLayout({ children }: { children: ReactNode }) {
   const { currentUser } = useSelector(
     (state: RootState) => state.accountReducer,
   );
-  const { enrollments } = useSelector(
-    (state: RootState) => state.enrollmentsReducer,
-  );
-  const canAccess =
-    currentUser?.role === "FACULTY" ||
-    enrollments.some(
-      (e: any) => e.user === currentUser?._id && e.course === cid,
-    );
 
-  if (!canAccess) {
-    redirect("/dashboard");
-  }
+  if (!currentUser) {
+  redirect("/account/signin");
+}
 
   return (
     <div id="wd-courses">

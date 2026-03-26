@@ -4,26 +4,31 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setCurrentUser } from "../reducer";
 import { RootState } from "../../store";
-import Link from "next/link";
-import { FormControl, FormSelect } from "react-bootstrap";
-import { Button } from "react-bootstrap";
+import { FormControl, FormSelect, Button } from "react-bootstrap";
+import * as client from "../client";
+
 export default function Profile() {
   const [profile, setProfile] = useState<any>({});
   const dispatch = useDispatch();
   const { currentUser } = useSelector(
     (state: RootState) => state.accountReducer,
   );
-  const fetchProfile = () => {
-    if (!currentUser) return redirect("/account/signin");
-    setProfile(currentUser);
+
+  const updateProfile = async () => {
+    const updatedProfile = await client.updateUser(profile);
+    dispatch(setCurrentUser(updatedProfile));
   };
-  const signout = () => {
+
+  const signout = async () => {
+    await client.signout();
     dispatch(setCurrentUser(null));
     redirect("/account/signin");
   };
+
   useEffect(() => {
-    fetchProfile();
-  }, []);
+    if (!currentUser) return redirect("/account/signin");
+    setProfile(currentUser);
+  }, [currentUser]);
 
   return (
     <div id="wd-profile-screen">
@@ -90,7 +95,10 @@ export default function Profile() {
             <option value="FACULTY">Faculty</option>
             <option value="STUDENT">Student</option>
           </FormSelect>
-          <Button onClick={signout} className="w-100 mb-2" id="wd-signout-btn">
+          <Button onClick={updateProfile} className="btn btn-primary w-100 mb-2">
+            Update
+          </Button>
+          <Button onClick={signout} className="btn btn-danger w-100 mb-2" id="wd-signout-btn">
             Sign out
           </Button>
         </div>

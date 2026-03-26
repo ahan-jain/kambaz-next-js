@@ -1,4 +1,5 @@
 "use client";
+import { useEffect } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import { ListGroup, ListGroupItem } from "react-bootstrap";
@@ -8,7 +9,8 @@ import { IoEllipsisVertical } from "react-icons/io5";
 import GreenCheckmark from "../modules/GreenCheckmark";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store";
-import { deleteAssignment } from "./reducer";
+import { setAssignments } from "./reducer";
+import * as client from "../../client";
 
 export default function Assignments() {
   const { cid } = useParams();
@@ -19,6 +21,22 @@ export default function Assignments() {
   const { currentUser } = useSelector(
     (state: RootState) => state.accountReducer,
   );
+
+  const fetchAssignments = async () => {
+    const assignments = await client.findAssignmentsForCourse(cid as string);
+    dispatch(setAssignments(assignments));
+  };
+
+  useEffect(() => {
+    fetchAssignments();
+  }, []);
+
+  const onDeleteAssignment = async (assignmentId: string) => {
+    const ok = window.confirm("Are you sure you want to delete this assignment?");
+    if (!ok) return;
+    await client.deleteAssignment(assignmentId);
+    dispatch(setAssignments(assignments.filter((a: any) => a._id !== assignmentId)));
+  };
 
   return (
     <div id="wd-assignments">
@@ -63,7 +81,6 @@ export default function Assignments() {
 
           <ListGroup className="rounded-0">
             {assignments
-              .filter((assignment: any) => assignment.course === cid)
               .map((assignment: any) => (
                 <ListGroupItem
                   key={assignment._id}
@@ -91,11 +108,7 @@ export default function Assignments() {
                         className="btn btn-danger btn-sm me-2"
                         onClick={(event) => {
                           event.preventDefault();
-                          const ok = window.confirm(
-                            "Are you sure you want to delete this assignment?",
-                          );
-                          if (!ok) return;
-                          dispatch(deleteAssignment(assignment._id));
+                          onDeleteAssignment(assignment._id);
                         }}
                       >
                         <FaTrash />
