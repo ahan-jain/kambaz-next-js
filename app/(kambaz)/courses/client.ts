@@ -60,3 +60,18 @@ export const updateAssignment = async (assignment: any) => {
   const { data } = await axios.put(`${ASSIGNMENTS_API}/${assignment._id}`, assignment);
   return data;
 };
+
+export const enrollInCourse = async (courseId: string) => {
+  const { data } = await axiosWithCredentials.post(
+    `${USERS_API}/current/courses/${courseId}/enroll`
+  );
+  return data;
+};
+
+export const unenrollFromCourse = async (courseId: string) => {
+  const { data } = await axiosWithCredentials.delete(
+    `${USERS_API}/current/courses/${courseId}/enroll`
+  );
+  return data;
+};
+
