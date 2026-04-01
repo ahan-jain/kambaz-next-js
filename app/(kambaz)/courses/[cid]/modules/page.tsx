@@ -18,7 +18,7 @@ export default function Modules() {
   const dispatch = useDispatch();
 
   const fetchModules = async () => {
-    const modules = await client.findModulesForCourse(cid);
+    const modules = await client.findModulesForCourse(cid as string);
     dispatch(setModules(modules));
   };
 
@@ -29,18 +29,18 @@ export default function Modules() {
   const onCreateModuleForCourse = async () => {
     if (!cid) return;
     const newModule = { name: moduleName, course: cid };
-    const module = await client.createModuleForCourse(cid, newModule);
+    const module = await client.createModuleForCourse(cid as string, newModule);
     dispatch(setModules([...modules, module]));
     setModuleName("");
   };
 
   const onRemoveModule = async (moduleId: string) => {
-    await client.deleteModule(cid, moduleId);
+    await client.deleteModule(cid as string, moduleId);
     dispatch(setModules(modules.filter((m: any) => m._id !== moduleId)));
   };
 
   const onUpdateModule = async (module: any) => {
-    await client.updateModule(cid, module);
+    await client.updateModule(cid as string, module);
     dispatch(setModules(modules.map((m: any) => m._id === module._id ? module : m)));
   };
 
