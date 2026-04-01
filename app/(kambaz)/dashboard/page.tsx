@@ -23,10 +23,12 @@ export default function Dashboard() {
   const { currentUser } = useSelector(
     (state: RootState) => state.accountReducer,
   );
-  const { enrollments, showAllCourses } = useSelector(
+  const { showAllCourses } = useSelector(
     (state: RootState) => state.enrollmentsReducer,
   );
   const dispatch = useDispatch();
+
+  const [enrolledCourseIds, setEnrolledCourseIds] = useState<string[]>([]);
 
   const [course, setCourse] = useState<any>({
     _id: "0",
@@ -40,10 +42,14 @@ export default function Dashboard() {
   
 const fetchCourses = async () => {
   try {
-    const courses = showAllCourses
+    const courses = (showAllCourses || currentUser?.role === "FACULTY")
       ? await client.fetchAllCourses()
       : await client.findMyCourses();
     dispatch(setCourses(courses));
+    if (currentUser?.role !== "FACULTY") {
+      const myCourses = await client.findMyCourses();
+      setEnrolledCourseIds(myCourses.map((c: any) => c._id));
+    }
   } catch (error) {
     console.error(error);
   }
@@ -71,15 +77,9 @@ useEffect(() => {
     );
   };
 
-  const enrolled = (courseId: string) =>
-    enrollments.some(
-      (e: any) => e.user === currentUser?._id && e.course === courseId,
-    );
+  const enrolled = (courseId: string) => enrolledCourseIds.includes(courseId);
 
-  const visibleCourses =
-    showAllCourses || currentUser?.role === "FACULTY"
-      ? courses
-      : courses.filter((c: any) => enrolled(c._id));
+  const visibleCourses = courses;
 
   return (
     <div id="wd-dashboard">

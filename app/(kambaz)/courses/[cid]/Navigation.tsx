@@ -20,7 +20,7 @@ export default function CourseNavigation() {
       {links.map((link) => {
         const path =
           link === "People"
-            ? `/courses/${cid}/people/table`
+            ? `/courses/${cid}/people`
             : `/courses/${cid}/${link.toLowerCase()}`;
         return (
           <Link

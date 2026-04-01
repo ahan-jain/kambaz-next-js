@@ -85,7 +85,7 @@ export default function Profile() {
             onChange={(e) => setProfile({ ...profile, email: e.target.value })}
           />
           <FormSelect
-            defaultValue="FACULTY"
+            value={profile.role}
             id="wd-role"
             className="mb-2"
             onChange={(e) => setProfile({ ...profile, role: e.target.value })}
