@@ -51,6 +51,14 @@ export default function Signin() {
       <Link id="wd-signup-link" href="signup">
         Sign up
       </Link>
+      <div className="mt-3 text-muted small">
+        <div><strong>Ahan Jain</strong> &amp; <strong>Xander Hoke</strong></div>
+        <div className="mt-1">
+          <a href="https://github.com/ahan-jain/kambaz-node-server-app" target="_blank" rel="noopener noreferrer">Frontend GitHub</a>
+          {" | "}
+          <a href="https://github.com/ahan-jain/kambaz-next-js" target="_blank" rel="noopener noreferrer">Backend GitHub</a>
+        </div>
+      </div>
     </div>
   );
 }
