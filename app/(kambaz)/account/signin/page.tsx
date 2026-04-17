@@ -52,7 +52,7 @@ export default function Signin() {
         Sign up
       </Link>
       <div className="mt-3 text-muted small">
-        <div><strong>Ahan Jain</strong> &amp; <strong>Xander Hoke</strong></div>
+        <div><strong>Ahan Jain</strong> &amp; <strong>Xander Hoke - Asynchronous Section</strong></div>
         <div className="mt-1">
           <a href="https://github.com/ahan-jain/kambaz-node-server-app" target="_blank" rel="noopener noreferrer">Frontend GitHub</a>
           {" | "}
