@@ -1,0 +1,78 @@
+[
+  {
+    "_id": "QUE101",
+    "quiz": "Q101",
+    "title": "HTML Definition",
+    "type": "MULTIPLE_CHOICE",
+    "points": 10,
+    "question": "What does HTML stand for?",
+    "choices": [
+      { "_id": "C1", "text": "HyperText Markup Language", "isCorrect": true },
+      { "_id": "C2", "text": "High Tech Modern Language", "isCorrect": false },
+      { "_id": "C3", "text": "Hyperlink Text Management Language", "isCorrect": false },
+      { "_id": "C4", "text": "Home Tool Markup Language", "isCorrect": false }
+    ],
+    "correctAnswer": "",
+    "possibleAnswers": []
+  },
+  {
+    "_id": "QUE102",
+    "quiz": "Q101",
+    "title": "HTML Self-Closing Tags",
+    "type": "TRUE_FALSE",
+    "points": 10,
+    "question": "The <br> tag in HTML is a self-closing tag.",
+    "choices": [],
+    "correctAnswer": "True",
+    "possibleAnswers": []
+  },
+  {
+    "_id": "QUE103",
+    "quiz": "Q101",
+    "title": "HTML Heading Tag",
+    "type": "FILL_IN_BLANK",
+    "points": 10,
+    "question": "The largest heading tag in HTML is <___>.",
+    "choices": [],
+    "correctAnswer": "",
+    "possibleAnswers": ["h1", "H1", "<h1>"]
+  },
+  {
+    "_id": "QUE201",
+    "quiz": "Q102",
+    "title": "CSS Box Model",
+    "type": "MULTIPLE_CHOICE",
+    "points": 10,
+    "question": "Which CSS property controls the space between the border and the content?",
+    "choices": [
+      { "_id": "C1", "text": "margin", "isCorrect": false },
+      { "_id": "C2", "text": "padding", "isCorrect": true },
+      { "_id": "C3", "text": "border-spacing", "isCorrect": false },
+      { "_id": "C4", "text": "spacing", "isCorrect": false }
+    ],
+    "correctAnswer": "",
+    "possibleAnswers": []
+  },
+  {
+    "_id": "QUE202",
+    "quiz": "Q102",
+    "title": "CSS Flexbox",
+    "type": "TRUE_FALSE",
+    "points": 10,
+    "question": "CSS Flexbox is primarily designed for two-dimensional layouts.",
+    "choices": [],
+    "correctAnswer": "False",
+    "possibleAnswers": []
+  },
+  {
+    "_id": "QUE301",
+    "quiz": "Q201",
+    "title": "Lift and Drag",
+    "type": "TRUE_FALSE",
+    "points": 10,
+    "question": "Lift force acts perpendicular to the direction of airflow.",
+    "choices": [],
+    "correctAnswer": "True",
+    "possibleAnswers": []
+  }
+]
